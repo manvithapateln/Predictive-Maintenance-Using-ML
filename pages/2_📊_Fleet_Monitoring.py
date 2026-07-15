@@ -3,8 +3,11 @@ import pandas as pd
 import numpy as np
 import joblib
 import plotly.express as px
+from streamlit_autorefresh import st_autorefresh
 
 st.set_page_config(layout="wide")
+st_autorefresh(interval=2000, key="fleetrefresh")
+
 
 # ---------- LOAD MODEL FILES ----------
 model = joblib.load("models/failure_model.pkl")
@@ -122,8 +125,6 @@ def generate_machine_data(n):
 
 
 df_live = generate_machine_data(num_machines)
-st_autorefresh(interval=2000, key="fleetrefresh")
-
 # ---------- STATUS TABLE ----------
 
 st.markdown('<p class="section-title">Live Machine Status</p>', unsafe_allow_html=True)
